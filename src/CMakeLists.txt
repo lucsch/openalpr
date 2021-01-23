@@ -4,6 +4,7 @@ set(CMAKE_BUILD_TYPE RelWithDebugInfo)
 #set(CMAKE_BUILD_TYPE Debug)
 
 cmake_minimum_required (VERSION 2.6)
+SET(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Set the OpenALPR version in cmake, and also add it as a DEFINE for the code to access
 SET(OPENALPR_MAJOR_VERSION "2021")
