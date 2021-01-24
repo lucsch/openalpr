@@ -59,15 +59,14 @@ set_target_properties(openalpr PROPERTIES SOVERSION ${OPENALPR_MAJOR_VERSION})
 TARGET_LINK_LIBRARIES(openalpr
   support
   ${STATE_DETECTION_LIB}
-  ${opencv_LIBS}
-  ${Tesseract_LIBRARIES}
+  ${CONAN_LIBS}
 )
 
 
-install (FILES   alpr.h     DESTINATION    ${CMAKE_INSTALL_PREFIX}/include)
-install (FILES   alpr_c.h     DESTINATION    ${CMAKE_INSTALL_PREFIX}/include)
-install (TARGETS openalpr-static DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
-install (TARGETS openalpr   DESTINATION    ${CMAKE_INSTALL_PREFIX}/lib)
+#install (FILES   alpr.h     DESTINATION    ${CMAKE_INSTALL_PREFIX}/include)
+#install (FILES   alpr_c.h     DESTINATION    ${CMAKE_INSTALL_PREFIX}/include)
+#install (TARGETS openalpr-static DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+#install (TARGETS openalpr   DESTINATION    ${CMAKE_INSTALL_PREFIX}/lib)
 
 # Compile GPU detector
 IF ( WITH_GPU_DETECTOR )

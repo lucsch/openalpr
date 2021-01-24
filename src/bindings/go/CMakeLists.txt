@@ -8,7 +8,7 @@ add_library(openalprgo SHARED ${go_source_files})
 
 set_target_properties(openalprgo PROPERTIES SOVERSION ${OPENALPR_MAJOR_VERSION})
 
-TARGET_LINK_LIBRARIES(openalprgo openalpr)
+TARGET_LINK_LIBRARIES(openalprgo openalpr ${CONAN_LIBS})
 
 if (NOT WIN32)
     #generate the .pc file

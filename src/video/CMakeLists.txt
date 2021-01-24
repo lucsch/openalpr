@@ -7,8 +7,9 @@ set(video_source_files
 
 add_library(video STATIC ${video_source_files})
 
-  TARGET_LINK_LIBRARIES(video
-	  support
-    )
+TARGET_LINK_LIBRARIES(video
+        support
+        ${CONAN_LIBS}
+        )
 
 #SET_TARGET_PROPERTIES( video PROPERTIES COMPILE_FLAGS -fPIC)

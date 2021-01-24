@@ -21,7 +21,7 @@ if (${JNI_FOUND} MATCHES "TRUE")
 
   set_target_properties(openalprjni PROPERTIES SOVERSION ${OPENALPR_MAJOR_VERSION})
 
-  TARGET_LINK_LIBRARIES(openalprjni openalpr)
+  TARGET_LINK_LIBRARIES(openalprjni openalpr ${CONAN_LIBS})
 
 
   install (TARGETS openalprjni   DESTINATION    ${CMAKE_INSTALL_PREFIX}/lib)
