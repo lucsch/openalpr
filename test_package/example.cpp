@@ -1,5 +1,8 @@
-#include "openalpr.h"
+#include <iostream>
+#include "alpr.h"
 
 int main() {
-    openalpr();
+    alpr::AlprResults myRes;
+    std::cout << "Loading ALPR results OK!" << std::endl;
+    return 0;
 }
