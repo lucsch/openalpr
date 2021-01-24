@@ -18,7 +18,7 @@ if (NOT WIN32)
     SET(includedir "\${exec_prefix}/include")
     SET(VERSION "${OPENALPR_VERSION}")
     CONFIGURE_FILE(
-      "${CMAKE_MODULE_PATH}/templates/openalpr.pc.in"
+      "${CMAKE_SOURCE_DIR}/cmake_modules/templates/openalpr.pc.in"
       "${CMAKE_CURRENT_BINARY_DIR}/pkgconfig/openalpr.pc"
       @ONLY)
     install (FILES "${CMAKE_CURRENT_BINARY_DIR}/pkgconfig/openalpr.pc" DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig")

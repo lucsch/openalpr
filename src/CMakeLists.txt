@@ -1,22 +1,27 @@
 project(src)
 
-set(CMAKE_BUILD_TYPE RelWithDebugInfo)
+# set(CMAKE_BUILD_TYPE RelWithDebugInfo)
 #set(CMAKE_BUILD_TYPE Debug)
 
 cmake_minimum_required (VERSION 2.6)
 SET(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+
+# Using the "cmake_find_package" generator
+set(CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR} ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake_modules/")
+set(CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR} ${CMAKE_PREFIX_PATH})
 
 # Set the OpenALPR version in cmake, and also add it as a DEFINE for the code to access
-SET(OPENALPR_MAJOR_VERSION "2021")
-SET(OPENALPR_MINOR_VERSION "01")
-SET(OPENALPR_PATCH_VERSION "01")
+SET(OPENALPR_MAJOR_VERSION "2")
+SET(OPENALPR_MINOR_VERSION "4")
+SET(OPENALPR_PATCH_VERSION "0")
 SET(OPENALPR_VERSION ${OPENALPR_MAJOR_VERSION}.${OPENALPR_MINOR_VERSION}.${OPENALPR_PATCH_VERSION})
 
 add_definitions( -DOPENALPR_MAJOR_VERSION=${OPENALPR_MAJOR_VERSION})
 add_definitions( -DOPENALPR_MINOR_VERSION=${OPENALPR_MINOR_VERSION})
 add_definitions( -DOPENALPR_PATCH_VERSION=${OPENALPR_PATCH_VERSION})
-
-SET(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules/")
 
 add_definitions( -DINSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}")
 
@@ -86,7 +91,7 @@ include_directories(${Tesseract_INCLUDE_DIRS})
 IF(OpenCV_FRAMEWORK_PATH)
   MESSAGE(STATUS "Using OpenCV iOS framework: ${OpenCV_FRAMEWORK_PATH}")
   SET(OpenCV_INCLUDE_DIRS "${OpenCV_FRAMEWORK_PATH}/Headers")
-  SET(OpenCV_LIBS ${OpenCV_FRAMEWORK_PATH})
+  SET(opencv_LIBS ${OpenCV_FRAMEWORK_PATH})
 
   # OpenCV's released framework has this disabled, so we must too.
   # http://stackoverflow.com/a/32710441/868173
@@ -107,9 +112,13 @@ IF (${OpenCV_VERSION} VERSION_LESS 2.4.7)
 ENDIF()
 
 include_directories(${OpenCV_INCLUDE_DIRS})
+include_directories(${opencv_INCLUDE_DIRS})
 
+# OPENCV_MAJOR_VERSION Didn't exist but OpenCV_VERSION do!
+string(SUBSTRING ${OpenCV_VERSION} 0 1 OpenCV_VERSION_MAJOR)
+
+message("-------------  ${OpenCV_VERSION} ${OpenCV_VERSION_MAJOR}--------------")
 add_definitions( -DOPENCV_MAJOR_VERSION=${OpenCV_VERSION_MAJOR})
-
 
 include_directories(./openalpr )
 
@@ -156,7 +165,7 @@ if (NOT IOS)
     ${STATE_DETECTION_LIB}
     support
     video
-    ${OpenCV_LIBS}
+    ${opencv_LIBS}
     ${Tesseract_LIBRARIES}
     ${Extra_LIBS}
   )
@@ -180,7 +189,7 @@ IF (WITH_DAEMON)
 	  support
       video
 	  curl
-	  ${OpenCV_LIBS}
+	  ${opencv_LIBS}
 	  ${Tesseract_LIBRARIES}
 	  ${log4cplus_LIBRARIES}
       ${Extra_LIBS}
@@ -251,7 +260,7 @@ SET (CPACK_DEBIAN_PACKAGE_SECTION "video")
 SET (CPACK_DEBIAN_ARCHITECTURE ${CMAKE_SYSTEM_PROCESSOR})
 SET (CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.1.3), libgcc1 (>= 4.1.1), libtesseract3 (>= 3.0.3), libopencv-core2.4 (>= 2.4.8), libopencv-objdetect2.4 (>= 2.4.8), libopencv-highgui2.4 (>= 2.4.8), libopencv-imgproc2.4 (>= 2.4.8), libopencv-flann2.4 (>= 2.4.8), libopencv-features2d2.4 (>= 2.4.8), libopencv-video2.4 (>= 2.4.8), libopencv-gpu2.4 (>=2.4.8), liblog4cplus-1.0-4, libcurl3, beanstalkd")
 
-SET (CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/../LICENSE")
+SET (CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENSE")
 SET (CPACK_PACKAGE_DESCRIPTION "OpenALPR - Open Source Automatic License Plate Recognition")
 SET (CPACK_PACKAGE_DESCRIPTION_SUMMARY "OpenALPR is an open source Automatic License Plate Recognition library written in C++.  The library analyzes images and identifies license plates. The output is the text representation of any license plate characters found in the image.  Check out a live online demo here: http://www.openalpr.com/demo.html" )
 SET (CPACK_PACKAGE_CONTACT "Matt Hill <matt@ndu.com>")
@@ -270,10 +279,10 @@ INCLUDE(CPack)
 # Uninstall target, for "make uninstall"
 # http://www.cmake.org/Wiki/CMake_FAQ#Can_I_do_.22make_uninstall.22_with_CMake.3F
 # ----------------------------------------------------------------------------
-CONFIGURE_FILE(
-  "${CMAKE_MODULE_PATH}/templates/cmake_uninstall.cmake.in"
-  "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
-  @ONLY)
+# CONFIGURE_FILE(
+#   "${CMAKE_MODULE_PATH}/templates/cmake_uninstall.cmake.in"
+#   "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
+#   @ONLY)
 
-ADD_CUSTOM_TARGET(uninstall COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
+# ADD_CUSTOM_TARGET(uninstall COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
 

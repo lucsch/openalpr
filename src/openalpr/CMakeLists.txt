@@ -59,7 +59,7 @@ set_target_properties(openalpr PROPERTIES SOVERSION ${OPENALPR_MAJOR_VERSION})
 TARGET_LINK_LIBRARIES(openalpr
   support
   ${STATE_DETECTION_LIB}
-  ${OpenCV_LIBS}
+  ${opencv_LIBS}
   ${Tesseract_LIBRARIES}
 )
 

@@ -17,7 +17,7 @@ ENDIF()
 set_target_properties(statedetection PROPERTIES SOVERSION ${OPENALPR_MAJOR_VERSION})
 
 TARGET_LINK_LIBRARIES(statedetection
-   ${OpenCV_LIBS}
+   ${opencv_LIBS}
    support
 )
 
