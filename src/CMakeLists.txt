@@ -3,7 +3,7 @@ project(src)
 # set(CMAKE_BUILD_TYPE RelWithDebugInfo)
 #set(CMAKE_BUILD_TYPE Debug)
 
-cmake_minimum_required (VERSION 2.6)
+# cmake_minimum_required (VERSION 2.6)
 SET(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -230,17 +230,17 @@ ENDIF()
 install (DIRECTORY  ${CMAKE_SOURCE_DIR}/../runtime_data DESTINATION         ${CMAKE_INSTALL_PREFIX}/share/openalpr)
 
 # set runtime_data to reflect the current CMAKE_INSTALL_PREFIX
-CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/../config/openalpr.conf.user ${CMAKE_CURRENT_BINARY_DIR}/config/openalpr.conf)
+CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config/openalpr.conf.user ${CMAKE_CURRENT_BINARY_DIR}/config/openalpr.conf)
 install (FILES      ${CMAKE_CURRENT_BINARY_DIR}/config/openalpr.conf DESTINATION ${CMAKE_INSTALL_SYSCONFDIR}/openalpr/      COMPONENT config)
 
-CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/../config/openalpr.conf.defaults ${CMAKE_CURRENT_BINARY_DIR}/share/openalpr/config/openalpr.defaults.conf)
+CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config/openalpr.conf.defaults ${CMAKE_CURRENT_BINARY_DIR}/share/openalpr/config/openalpr.defaults.conf)
 install (FILES      ${CMAKE_CURRENT_BINARY_DIR}/share/openalpr/config/openalpr.defaults.conf DESTINATION ${CMAKE_INSTALL_PREFIX}/share/openalpr/config      COMPONENT config)
 
 IF (WITH_DAEMON)
-  CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/../config/alprd.conf.user ${CMAKE_CURRENT_BINARY_DIR}/config/alprd.conf)
+  CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config/alprd.conf.user ${CMAKE_CURRENT_BINARY_DIR}/config/alprd.conf)
   install (FILES      ${CMAKE_CURRENT_BINARY_DIR}/config/alprd.conf DESTINATION ${CMAKE_INSTALL_SYSCONFDIR}/openalpr/      COMPONENT config)
 
-  CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/../config/alprd.conf.defaults ${CMAKE_CURRENT_BINARY_DIR}/share/openalpr/config/alprd.defaults.conf)
+  CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config/alprd.conf.defaults ${CMAKE_CURRENT_BINARY_DIR}/share/openalpr/config/alprd.defaults.conf)
   install (FILES      ${CMAKE_CURRENT_BINARY_DIR}/share/openalpr/config/alprd.defaults.conf DESTINATION ${CMAKE_INSTALL_PREFIX}/share/openalpr/config      COMPONENT config)
 
   install (TARGETS    alprd DESTINATION  ${CMAKE_INSTALL_PREFIX}/bin)
