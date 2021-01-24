@@ -24,7 +24,7 @@ class OpenalprConan(ConanFile):
 
     def build(self):
         cmake = CMake(self)
-        cmake.configure(source_folder="src")
+        cmake.configure()
         cmake.build()
 
         # Explicit way:
@@ -33,12 +33,17 @@ class OpenalprConan(ConanFile):
         # self.run("cmake --build . %s" % cmake.build_config)
 
     def package(self):
-        self.copy("*.h", dst="include", src="src")
+        self.copy("alpr.h", dst="include", src="src/openalpr")
+        self.copy("alpr_c.h", dst="include", src="src/openalpr")
         self.copy("*.lib", dst="lib", keep_path=False)
         self.copy("*.dll", dst="bin", keep_path=False)
         self.copy("*.dylib*", dst="lib", keep_path=False)
         self.copy("*.so", dst="lib", keep_path=False)
         self.copy("*.a", dst="lib", keep_path=False)
+        self.copy("*", dst="bin", src="bin")
+        self.copy("*.defaults", dst="share/openalpr/config", src="config")
+        self.copy("*", dst="share/openalpr/runtime_data", src="runtime_data")
+
 
     def package_info(self):
         self.cpp_info.libs = ["openalpr"]
