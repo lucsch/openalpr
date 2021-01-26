@@ -56,10 +56,12 @@ add_subdirectory(support)
 add_library(openalpr ${lpr_source_files})
 set_target_properties(openalpr PROPERTIES SOVERSION ${OPENALPR_MAJOR_VERSION})
 TARGET_LINK_LIBRARIES(openalpr
-  support
-  ${STATE_DETECTION_LIB}
-  ${CONAN_LIBS}
-)
+        support
+        ${STATE_DETECTION_LIB}
+        ${CONAN_LIBS}
+        video
+        support
+        )
 
 
 #install (FILES   alpr.h     DESTINATION    ${CMAKE_INSTALL_PREFIX}/include)

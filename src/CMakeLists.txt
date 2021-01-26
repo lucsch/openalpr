@@ -156,9 +156,7 @@ ENDIF()
 TARGET_LINK_LIBRARIES(alpr
         openalpr
         ${STATE_DETECTION_LIB}
-        ${CONAN_LIBS}
-        video
-        )
+        ${CONAN_LIBS})
 # support
 # video
 

@@ -43,9 +43,10 @@ re2/util/valgrind.cc
 
 include_directories(.)
 
-add_library(support STATIC 
+add_library(support
   ${support_source_files} 
   ${regex_source_files}
 )
+target_link_libraries(support ${CONAN_LIBS})
 
-SET_TARGET_PROPERTIES( support PROPERTIES COMPILE_FLAGS -fPIC)
+# SET_TARGET_PROPERTIES( support PROPERTIES COMPILE_FLAGS -fPIC)
