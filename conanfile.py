@@ -14,7 +14,7 @@ class OpenalprConan(ConanFile):
     default_options = {"shared": False, "fPIC": True}
     generators = "cmake"
     exports_sources = "CMakeLists.txt", "src/*", "config/*", "doc/*", "runtime_data/*"
-    requires = [("opencv/3.4.12"),
+    requires = [("opencv/4.5.1"),
                 ("tesseract/4.1.1"), ("libwebp/1.1.0", "override"),
                 ("log4cplus/2.0.5")]
 

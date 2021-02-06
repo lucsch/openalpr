@@ -113,7 +113,7 @@ ENDIF()
 # OPENCV_MAJOR_VERSION Didn't exist but OpenCV_VERSION do!
 #string(SUBSTRING ${OpenCV_VERSION} 0 1 OpenCV_VERSION_MAJOR)
 #message("-------------  ${OpenCV_VERSION} ${OpenCV_VERSION_MAJOR}--------------")
-add_definitions( -DOPENCV_MAJOR_VERSION=3)
+add_definitions( -DOPENCV_MAJOR_VERSION=4)
 
 include_directories(./openalpr )
 
