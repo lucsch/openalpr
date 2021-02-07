@@ -18,7 +18,16 @@
         --build-folder=/Users/lucien/Desktop/testopenalpr-build
         --package=/Users/lucien/Desktop/testopenalpr-pkg
 
-conan package . --source-folder=/Users/lucien/Desktop/testopenalpr --build-folder=/Users/lucien/Desktop/testopenalpr-build --package=/Users/lucien/Desktop/testopenalpr-pkg
+1. exporter le package crée
+
+         conan export-pkg . lucsch/testing --source-folder=tmp/source 
+         --build-folder=tmp/build --profile=myprofile
+
+1. tester le package
+
+         conan test test_package openalpr/2.4@lucsch/testing
+
+
 
 # Création du paquet
 
