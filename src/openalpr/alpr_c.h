@@ -25,11 +25,11 @@
 extern "C" { 
 #endif
 
-#ifdef WIN32
-  #define OPENALPRC_DLL_EXPORT __declspec( dllexport )
-#else
+//#ifdef WIN32
+//  #define OPENALPRC_DLL_EXPORT __declspec( dllexport )
+//#else
   #define OPENALPRC_DLL_EXPORT
-#endif
+// #endif
 
 typedef void OPENALPR;
 
