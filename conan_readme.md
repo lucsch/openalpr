@@ -33,3 +33,9 @@
 
         conan create . lucsch/testing -s build_type=Debug
 
+
+# Création de paquet (dernière version)
+
+        sudo apt install libva-dev
+        sudo apt install libvdpau-dev
+        conan create . terranum-conan+openalpr/stable
